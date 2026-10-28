@@ -2,7 +2,6 @@
 
 > **"Early Intervention. Academic Insights. Powered by Supervised Machine Learning."**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.0%2B-black.svg)](https://flask.palletsprojects.com/)
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.3%2B-F7931E.svg)](https://scikit-learn.org/)
@@ -117,6 +116,5 @@ tests/test_model.py::test_model_module_importable PASSED
 
 ---
 
-## 📄 License
+## 📄 License and Copyright\n\nAll rights reserved © 2026 Chakradhar Buridi.
 
-MIT License © 2026 Chakradhar Buridi. Built with pride for educational machine learning.
