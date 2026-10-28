@@ -1,4 +1,4 @@
-"""
+﻿"""
 Flask Application for Student Performance Predictor
 Works both locally and on PythonAnywhere
 """
@@ -30,8 +30,8 @@ def load_data():
     
     # Try different paths for the CSV file
     possible_paths = [
-        os.path.join(BASE_DIR, 'Student_performance_data .csv'),
-        'Student_performance_data .csv',
+        os.path.join(BASE_DIR, 'student_performance_data.csv'),
+        'student_performance_data.csv',
     ]
     
     file_path = None
@@ -41,7 +41,7 @@ def load_data():
             break
     
     if file_path is None:
-        print("ERROR: Could not find 'Student_performance_data .csv'")
+        print("ERROR: Could not find 'student_performance_data.csv'")
         return None
     
     print(f"Loading data from: {file_path}")
@@ -123,8 +123,9 @@ def get_student(student_id):
 if __name__ == '__main__':
     from waitress import serve
     print("")
-    print("  ✅ Server running at: http://127.0.0.1:8080")
-    print("  📊 Open in browser to use the app!")
+    print("  âœ… Server running at: http://127.0.0.1:8080")
+    print("  ðŸ“Š Open in browser to use the app!")
     print("")
     print("=" * 50)
     serve(app, host='0.0.0.0', port=8080)
+

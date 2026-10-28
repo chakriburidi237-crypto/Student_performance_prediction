@@ -1,4 +1,4 @@
-"""
+﻿"""
 Student Performance Prediction & Lookup Tool
 
 Features:
@@ -24,17 +24,17 @@ data = None
 def get_data_path():
     """Get the correct path to the CSV file."""
     # Try current directory first
-    if os.path.exists("Student_performance_data .csv"):
-        return "Student_performance_data .csv"
+    if os.path.exists("student_performance_data.csv"):
+        return "student_performance_data.csv"
     # Try parent directory (when running from backend folder)
-    parent_path = os.path.join(os.path.dirname(__file__), "..", "Student_performance_data .csv")
+    parent_path = os.path.join(os.path.dirname(__file__), "..", "student_performance_data.csv")
     if os.path.exists(parent_path):
         return parent_path
     # Try same directory as this script
-    script_path = os.path.join(os.path.dirname(__file__), "Student_performance_data .csv")
+    script_path = os.path.join(os.path.dirname(__file__), "student_performance_data.csv")
     if os.path.exists(script_path):
         return script_path
-    return "Student_performance_data .csv"
+    return "student_performance_data.csv"
 
 def load_data():
     """Load and preprocess the student data."""
@@ -237,3 +237,4 @@ if __name__ == "__main__":
     load_data()
     run_training()
     run_interactive_search()
+
