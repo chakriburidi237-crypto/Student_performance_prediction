@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #818cf8;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f1f5f9;
+            --text-muted: #94a3b8;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --border-color: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .search-section {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        input {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            font-size: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 0.75rem;
+            outline: none;
+            transition: all 0.3s;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+        }
+
+        input::placeholder {
+            color: var(--text-muted);
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #7c3aed 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        button:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .student-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border-color);
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-header h2 {
+            font-size: 1.75rem;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #7c3aed 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-item {
+            background: var(--bg-color);
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .value {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .gpa-section {
+            margin-top: 2rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #7c3aed 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gpa-section .label {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .gpa-section .value {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error-color);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #result {
+            display: none;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🎓</div>
+            <h1>Student Insights</h1>
+            <p class="subtitle">Performance Prediction & Analytics System</p>
+        </header>
+
+        <div class="search-section">
+            <input type="number" id="studentId" placeholder="Enter Student ID (e.g. 1001)"
+                onkeypress="if(event.key==='Enter') searchStudent()">
+            <button onclick="searchStudent()" id="searchBtn">
+                <span>🔍</span> Search
+            </button>
+        </div>
+
+        <div id="result"></div>
+
+        <footer>
+            <p>Backend API: http://127.0.0.1:5000 | Powered by Flask & Machine Learning</p>
+        </footer>
+    </div>
+
+    <script>
+        async function searchStudent() {
+            const studentId = document.getElementById('studentId').value;
+            const resultDiv = document.getElementById('result');
+            const searchBtn = document.getElementById('searchBtn');
+
+            if (!studentId) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '<div class="error-message">⚠️ Please enter a Student ID</div>';
+                return;
+            }
+
+            // Show loading
+            searchBtn.disabled = true;
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<div class="loading"><div class="spinner"></div>Searching...</div>';
+
+            try {
+                const response = await fetch(`http://127.0.0.1:8080/api/student/${studentId}`);
+
+                if (!response.ok) {
+                    throw new Error('Student not found');
+                }
+
+                const data = await response.json();
+                displayStudent(data);
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error-message">⚠️ ${error.message}</div>`;
+            } finally {
+                searchBtn.disabled = false;
+            }
+        }
+
+        function displayStudent(student) {
+            const resultDiv = document.getElementById('result');
+            const { StudentID, GPA, GradeClass, ...otherDetails } = student;
+
+            let gridItems = Object.entries(otherDetails).map(([key, value]) => {
+                const formattedValue = typeof value === 'number' && !Number.isInteger(value)
+                    ? value.toFixed(2)
+                    : value;
+                const formattedKey = key.replace(/([A-Z])/g, ' $1').trim();
+                return `
+                    <div class="info-item">
+                        <div class="label">${formattedKey}</div>
+                        <div class="value">${formattedValue}</div>
+                    </div>
+                `;
+            }).join('');
+
+            const gpaDisplay = typeof GPA === 'number' ? GPA.toFixed(4) : GPA;
+
+            resultDiv.innerHTML = `
+                <div class="student-card">
+                    <div class="card-header">
+                        <div>
+                            <div class="label">Student Profile</div>
+                            <h2>ID: ${StudentID}</h2>
+                        </div>
+                        <div class="badge">Grade ${GradeClass}</div>
+                    </div>
+                    <div class="grid">${gridItems}</div>
+                    <div class="gpa-section">
+                        <div>
+                            <div class="label">Grade Point Average</div>
+                            <div class="value">${gpaDisplay}</div>
+                        </div>
+                        <div style="font-size: 4rem;">📊</div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html>
